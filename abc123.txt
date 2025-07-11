@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Calculadora Simple</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="calculadora">
+      <h2>Calculadora</h2>
+      <input type="text" id="pantalla" readonly />
+      <div class="botones">
+        <button onclick="agregar('7')">7</button>
+        <button onclick="agregar('8')">8</button>
+        <button onclick="agregar('9')">9</button>
+        <button onclick="agregar('+')">+</button><br />
+
+        <button onclick="agregar('4')">4</button>
+        <button onclick="agregar('5')">5</button>
+        <button onclick="agregar('6')">6</button>
+        <button onclick="agregar('-')">-</button><br />
+
+        <button onclick="agregar('1')">1</button>
+        <button onclick="agregar('2')">2</button>
+        <button onclick="agregar('3')">3</button>
+        <button onclick="agregar('*')">*</button><br />
+
+        <button onclick="agregar('0')">0</button>
+        <button onclick="agregar('.')">.</button>
+        <button onclick="calcular()">=</button>
+        <button onclick="agregar('/')">/</button><br />
+        <button onclick="limpiar()">C</button>
+      </div>
+    </div>
+    <script src="scripts.js"></script>
+  </body>
+</html>
+
+-------------------------------------------------------
+
+body {
+  font-family: "Segoe UI";
+  background: linear-gradient(#cfd8df, #a0aab3);
+  text-align: center;
+  margin-top: 50px;
+}
+
+.calculadora {
+  background: linear-gradient(#f0f0f0, #dcdcdc);
+  width: 300px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px #fff inset;
+}
+
+input{
+  width: 90%;
+  height: 40px;
+  font-size: 20px;
+  margin-bottom: 10px;
+  border: 1px solid #999;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow:inset 1px 1px 3px #ccc;
+  padding: 5px;
+}
+
+button {
+  width: 60px;
+  height: 40px;
+  font-size: 18px;
+  margin: 5px;
+  background: linear-gradient(to bottom, #ffffff, #d6d6d6);
+  border: 1px solid #999;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+button:active {
+  background: linear-gradient(to bottom, #d6d6d6, #ffffff);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+-------------------------------------------------------
+
+let pantalla = document.getElementById("pantalla");
+let resultadoMostrado = false;
+
+//Esta funcion agrega el numero seleccionado a la pantalla
+function agregar(valor) { 
+  if (resultadoMostrado) {
+    pantalla.value = "";
+    resultadoMostrado = false;
+  }
+  pantalla.value = pantalla.value + valor;
+}
+
+//Esta funcion hace el calulo, muestra el resultado en pantalla y tambien muestra error en caso de que el resultado sea indefinido o vacio
+function calcular() {
+  let resultado = eval(pantalla.value);
+  if (resultado === undefined || resultado === "") {
+    pantalla.value = "Error";
+  } else {G
+    pantalla.value = resultado;
+  }
+
+  resultadoMostrado = true;
+}
+
+//Esta funcion limpia la pantalla
+function limpiar() {
+  pantalla.value = "";
+  resultadoMostrado = false;
+}
